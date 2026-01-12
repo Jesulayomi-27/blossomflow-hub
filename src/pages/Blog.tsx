@@ -384,7 +384,7 @@ const Blog = () => {
                       <span>{featuredPost.date}</span>
                     </div>
                     <Link to={`/blog/${featuredPost.slug}`}>
-                      <Button className="btn-primary group">
+                      <Button className="btn-primary group bg-purple-500">
                         Read Full Article
                         <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </Button>

@@ -8,6 +8,7 @@ import {
   Mail,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/purple_logo.png";
 
 const Footer = () => {
   const socialLinks = [
@@ -18,42 +19,32 @@ const Footer = () => {
     },
     {
       icon: Facebook,
-      href: "https://facebook.com/blossomsfitnesshub",
+      href: "https://facebook.com/blossom's fitnesshub",
       label: "Facebook",
     },
     {
       icon: Youtube,
-      href: "https://youtube.com/blossomsfitnesshub",
+      href: "https://youtube.com/blossomsfitnesshub2483",
       label: "YouTube",
     },
     {
       icon: Twitter,
-      href: "https://twitter.com/blossomsfitnesshub",
+      href: "https://twitter.com/blossom's fitnesshub",
       label: "X (Twitter)",
     },
   ];
 
   const quickLinks = [
-    { label: "About Us", href: "#about" },
-    { label: "Virtual Classes", href: "#classes" },
-    { label: "Membership Plans", href: "#pricing" },
-    { label: "Personal Training", href: "#training" },
-    { label: "Nutrition Coaching", href: "#nutrition" },
-    { label: "Corporate Wellness", href: "#corporate" },
+    { label: "About Us", href: "/bout" },
+    { label: "Virtual Classes", href: "/classes" },
   ];
 
   const supportLinks = [
-    { label: "Help Center", href: "#help" },
+    { label: "Help Center", href: "/contact" },
     { label: "Contact Support", href: "#support" },
-    { label: "Class Schedule", href: "#schedule" },
-    { label: "Booking Policy", href: "#policy" },
-    { label: "Refund Policy", href: "#refunds" },
-    { label: "Technical Support", href: "#tech" },
   ];
 
   const shopLinks = [
-    { label: "Fitness Equipment", href: "#equipment" },
-    { label: "Supplements", href: "#supplements" },
     { label: "Workout Apparel", href: "#apparel" },
     { label: "Accessories", href: "#accessories" },
     { label: "Gift Cards", href: "#gifts" },
@@ -70,15 +61,10 @@ const Footer = () => {
             <div className="space-y-6">
               <div className="flex items-center space-x-3">
                 <img
-                  src="/lovable-uploads/8abaadf7-cbec-4610-8043-eb6dc5b87331.png"
+                  src={logo}
                   alt="Blossom's Fitness Hub"
                   className="h-10 w-auto"
                 />
-                <div>
-                  <h3 className="text-lg font-bold text-creamish">
-                    Blossom's Fitness Hub
-                  </h3>
-                </div>
               </div>
 
               <p className="text-creamish/80 leading-relaxed">
@@ -89,23 +75,23 @@ const Footer = () => {
 
               {/* Contact Info */}
               <div className="space-y-3">
-                <div className="flex items-center space-x-3 text-sm">
+                {/* <div className="flex items-center space-x-3 text-sm">
                   <MapPin className="h-4 w-4 text-primary" />
                   <span className="text-muted-foreground">
                     Nestoil Towers,4th Flooor,41/42 Akin Adesola Street,
                     Victoria Island,Lagos
                   </span>
-                </div>
-                <div className="flex items-center space-x-3 text-sm">
+                </div> */}
+                {/* <div className="flex items-center space-x-3 text-sm">
                   <Phone className="h-4 w-4 text-primary" />
                   <span className="text-muted-foreground">
                     +234 803 502 6262
                   </span>
-                </div>
+                </div> */}
                 <div className="flex items-center space-x-3 text-sm">
                   <Mail className="h-4 w-4 text-primary" />
                   <span className="text-muted-foreground">
-                    blossom@blossomsfitnesshub.com
+                    admin@blossomsfitnesshub.com
                   </span>
                 </div>
               </div>
@@ -118,7 +104,7 @@ const Footer = () => {
                     variant="ghost"
                     size="icon"
                     asChild
-                    className="hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                    className="hover:bg-primary hover:text-primary-foreground transition-all duration-300 bg-purple-300 "
                   >
                     <a
                       href={social.href}
@@ -190,21 +176,13 @@ const Footer = () => {
         <div className="border-t border-border py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm text-muted-foreground">
-              © 2024 Blossom's Fitness Hub. All rights reserved.
+              © {new Date().getFullYear()} Blossom's Fitness Hub. All rights
+              reserved.
             </div>
 
             <div className="flex flex-wrap justify-center md:justify-end space-x-6 text-sm">
               <span className="text-muted-foreground hover:text-primary transition-colors hover-underline cursor-pointer">
                 Privacy Policy
-              </span>
-              <span className="text-muted-foreground hover:text-primary transition-colors hover-underline cursor-pointer">
-                Terms of Service
-              </span>
-              <span className="text-muted-foreground hover:text-primary transition-colors hover-underline cursor-pointer">
-                Cookie Policy
-              </span>
-              <span className="text-muted-foreground hover:text-primary transition-colors hover-underline cursor-pointer">
-                Accessibility
               </span>
             </div>
           </div>

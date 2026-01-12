@@ -4,16 +4,16 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { 
-  Calendar, 
-  Clock, 
-  Users, 
-  Video, 
-  MapPin, 
-  Star, 
-  Zap, 
-  Sparkles, 
-  TrendingUp, 
+import {
+  Calendar,
+  Clock,
+  Users,
+  Video,
+  MapPin,
+  Star,
+  Zap,
+  Sparkles,
+  TrendingUp,
   Award,
   Filter,
   Search,
@@ -22,7 +22,7 @@ import {
   Heart,
   Share2,
   ShoppingCart,
-  Tag
+  Tag,
 } from "lucide-react";
 import { apiService, Class as ApiClass } from "@/services/api";
 import { useCurrency } from "@/hooks/useCurrency";
@@ -70,7 +70,7 @@ const Classes = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [sortBy, setSortBy] = useState("popular");
   const [favorites, setFavorites] = useState<string[]>([]);
-  
+
   const { formatPrice, currency } = useCurrency();
   const { toast } = useToast();
   const { user, isAuthenticated } = useAuth();
@@ -95,12 +95,12 @@ const Classes = () => {
       price: {
         naira: Number(apiClass.price.naira) || 0,
         usd: Number(apiClass.price.usd) || 0,
-        gbp: Number(apiClass.price.gbp) || 0
+        gbp: Number(apiClass.price.gbp) || 0,
       },
       category: apiClass.category || "Fitness",
       instructor: apiClass.instructor || "Dr. Blossom",
       level: apiClass.level || "All Levels",
-      location: apiClass.location
+      location: apiClass.location,
     };
   };
 
@@ -109,10 +109,10 @@ const Classes = () => {
     try {
       setLoading(true);
       const data = await apiService.getClasses();
-      
+
       // Convert API classes to LocalClass format
       const processedData: LocalClass[] = data.map(convertToLocalClass);
-      
+
       setClasses(processedData);
       setFilteredClasses(processedData);
     } catch (error) {
@@ -142,7 +142,7 @@ const Classes = () => {
       name: "Zumba Fiesta",
       description: "High-energy dance fitness party with Latin rhythms",
       type: "in-person",
-      date: new Date().toISOString().split('T')[0],
+      date: new Date().toISOString().split("T")[0],
       time: "18:00",
       duration: "60 minutes",
       spotsAvailable: 15,
@@ -150,28 +150,28 @@ const Classes = () => {
       category: "Zumba",
       instructor: "Dr. Blossom",
       level: "All Levels",
-      location: "Lagos Main Studio"
+      location: "Lagos Main Studio",
     },
     {
       id: "2",
       name: "Virtual Zumba Party",
       description: "Join from anywhere! Live-streamed dance session",
       type: "virtual",
-      date: new Date().toISOString().split('T')[0],
+      date: new Date().toISOString().split("T")[0],
       time: "19:30",
       duration: "45 minutes",
       spotsAvailable: 50,
       price: { naira: 3000, usd: 10, gbp: 8 },
       category: "Zumba",
       instructor: "Dr. Blossom",
-      level: "Beginner"
+      level: "Beginner",
     },
     {
       id: "3",
       name: "HIIT Cardio Blast",
       description: "High-intensity interval training for maximum burn",
       type: "in-person",
-      date: new Date(Date.now() + 86400000).toISOString().split('T')[0],
+      date: new Date(Date.now() + 86400000).toISOString().split("T")[0],
       time: "07:00",
       duration: "30 minutes",
       spotsAvailable: 10,
@@ -179,14 +179,14 @@ const Classes = () => {
       category: "HIIT",
       instructor: "Dr. Blossom",
       location: "Abuja Fitness Hub",
-      level: "Advanced"
+      level: "Advanced",
     },
     {
       id: "4",
       name: "Yoga & Mindfulness",
       description: "Restorative yoga session for mind-body connection",
       type: "hybrid",
-      date: new Date(Date.now() + 172800000).toISOString().split('T')[0],
+      date: new Date(Date.now() + 172800000).toISOString().split("T")[0],
       time: "08:00",
       duration: "75 minutes",
       spotsAvailable: 20,
@@ -194,14 +194,14 @@ const Classes = () => {
       category: "Yoga",
       instructor: "Dr. Blossom",
       location: "Virtual + Lagos Studio",
-      level: "All Levels"
+      level: "All Levels",
     },
     {
       id: "5",
       name: "Dance Cardio Fusion",
       description: "Fun dance routines mixing various styles",
       type: "in-person",
-      date: new Date(Date.now() + 259200000).toISOString().split('T')[0],
+      date: new Date(Date.now() + 259200000).toISOString().split("T")[0],
       time: "17:00",
       duration: "50 minutes",
       spotsAvailable: 25,
@@ -209,14 +209,14 @@ const Classes = () => {
       category: "Cardio",
       instructor: "Dr. Blossom",
       location: "Port Harcourt Center",
-      level: "Intermediate"
+      level: "Intermediate",
     },
     {
       id: "6",
       name: "Senior Fitness",
       description: "Gentle movement classes for active seniors",
       type: "in-person",
-      date: new Date(Date.now() + 345600000).toISOString().split('T')[0],
+      date: new Date(Date.now() + 345600000).toISOString().split("T")[0],
       time: "10:00",
       duration: "40 minutes",
       spotsAvailable: 30,
@@ -224,18 +224,18 @@ const Classes = () => {
       category: "Senior Fitness",
       instructor: "Dr. Blossom",
       location: "Lagos Main Studio",
-      level: "Beginner"
-    }
+      level: "Beginner",
+    },
   ];
 
   // Calculate total bulk price - FIXED VERSION
   const totalBulkPrice = useMemo(() => {
     if (selectedClasses.length === 0) return 0;
-    
+
     const total = selectedClasses.reduce((sum, classId) => {
-      const classItem = classes.find(c => c.id === classId);
+      const classItem = classes.find((c) => c.id === classId);
       if (!classItem) return sum;
-      
+
       // Get price based on currency
       let price = 0;
       switch (currency) {
@@ -251,22 +251,22 @@ const Classes = () => {
         default:
           price = Number(classItem.price.usd);
       }
-      
+
       return sum + (isNaN(price) ? 0 : price);
     }, 0);
-    
+
     return total;
   }, [selectedClasses, classes, currency]);
 
   // Calculate bulk discount
   const bulkDiscount = useMemo(() => {
     if (selectedClasses.length < 3) return 0;
-    
+
     // Discount tiers
     if (selectedClasses.length >= 5) {
-      return totalBulkPrice * 0.20; // 20% off for 5+ classes
+      return totalBulkPrice * 0.2; // 20% off for 5+ classes
     } else if (selectedClasses.length >= 3) {
-      return totalBulkPrice * 0.10; // 10% off for 3-4 classes
+      return totalBulkPrice * 0.1; // 10% off for 3-4 classes
     }
     return 0;
   }, [selectedClasses.length, totalBulkPrice]);
@@ -282,23 +282,24 @@ const Classes = () => {
 
     // Filter by search term
     if (searchTerm) {
-      result = result.filter(cls => 
-        cls.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        cls.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        cls.category.toLowerCase().includes(searchTerm.toLowerCase())
+      result = result.filter(
+        (cls) =>
+          cls.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          cls.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          cls.category.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
     // Filter by tab
     if (activeTab !== "all") {
       if (activeTab === "virtual") {
-        result = result.filter(cls => cls.type === "virtual");
+        result = result.filter((cls) => cls.type === "virtual");
       } else if (activeTab === "in-person") {
-        result = result.filter(cls => cls.type === "in-person");
+        result = result.filter((cls) => cls.type === "in-person");
       } else if (activeTab === "hybrid") {
-        result = result.filter(cls => cls.type === "hybrid");
+        result = result.filter((cls) => cls.type === "hybrid");
       } else if (activeTab === "free") {
-        result = result.filter(cls => {
+        result = result.filter((cls) => {
           let price = 0;
           switch (currency) {
             case "₦":
@@ -314,7 +315,9 @@ const Classes = () => {
           return price === 0;
         });
       } else {
-        result = result.filter(cls => cls.category.toLowerCase() === activeTab);
+        result = result.filter(
+          (cls) => cls.category.toLowerCase() === activeTab
+        );
       }
     }
 
@@ -325,24 +328,42 @@ const Classes = () => {
         break;
       case "price-low":
         result.sort((a, b) => {
-          const priceA = currency === "₦" ? Number(a.price.naira) : 
-                        currency === "£" ? Number(a.price.gbp) : Number(a.price.usd);
-          const priceB = currency === "₦" ? Number(b.price.naira) : 
-                        currency === "£" ? Number(b.price.gbp) : Number(b.price.usd);
+          const priceA =
+            currency === "₦"
+              ? Number(a.price.naira)
+              : currency === "£"
+              ? Number(a.price.gbp)
+              : Number(a.price.usd);
+          const priceB =
+            currency === "₦"
+              ? Number(b.price.naira)
+              : currency === "£"
+              ? Number(b.price.gbp)
+              : Number(b.price.usd);
           return priceA - priceB;
         });
         break;
       case "price-high":
         result.sort((a, b) => {
-          const priceA = currency === "₦" ? Number(a.price.naira) : 
-                        currency === "£" ? Number(a.price.gbp) : Number(a.price.usd);
-          const priceB = currency === "₦" ? Number(b.price.naira) : 
-                        currency === "£" ? Number(b.price.gbp) : Number(b.price.usd);
+          const priceA =
+            currency === "₦"
+              ? Number(a.price.naira)
+              : currency === "£"
+              ? Number(a.price.gbp)
+              : Number(a.price.usd);
+          const priceB =
+            currency === "₦"
+              ? Number(b.price.naira)
+              : currency === "£"
+              ? Number(b.price.gbp)
+              : Number(b.price.usd);
           return priceB - priceA;
         });
         break;
       case "date":
-        result.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        result.sort(
+          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+        );
         break;
       default:
         break;
@@ -383,15 +404,19 @@ const Classes = () => {
       if (apiService.subscribeToClass) {
         await apiService.subscribeToClass(classItem.id, user?.id);
       }
-      
+
       toast({
         title: "Class Booked!",
         description: `You've successfully booked ${classItem.name}`,
       });
-      
+
       // Redirect to checkout for paid classes
-      const price = currency === "₦" ? classItem.price.naira : 
-                   currency === "£" ? classItem.price.gbp : classItem.price.usd;
+      const price =
+        currency === "₦"
+          ? classItem.price.naira
+          : currency === "£"
+          ? classItem.price.gbp
+          : classItem.price.usd;
       if (Number(price) > 0) {
         setTimeout(() => {
           window.location.href = `/checkout?classId=${classItem.id}`;
@@ -418,22 +443,26 @@ const Classes = () => {
     }
 
     // Add selected classes to cart
-    const selectedClassItems = classes.filter(c => selectedClasses.includes(c.id));
-    
+    const selectedClassItems = classes.filter((c) =>
+      selectedClasses.includes(c.id)
+    );
+
     // TODO: Implement bulk add to cart API call
     console.log("Bulk purchase items:", selectedClassItems);
     console.log("Total price:", finalBulkPrice);
     console.log("Discount:", bulkDiscount);
-    
+
     toast({
       title: "Added to Cart!",
       description: `${selectedClasses.length} classes added to cart with ${
-        bulkDiscount > 0 ? formatPrice(bulkDiscount) + ' discount applied!' : 'no discount.'
+        bulkDiscount > 0
+          ? formatPrice(bulkDiscount) + " discount applied!"
+          : "no discount."
       }`,
     });
-    
+
     // Redirect to checkout with selected class IDs
-    const classIds = selectedClasses.join(',');
+    const classIds = selectedClasses.join(",");
     window.location.href = `/checkout?classIds=${classIds}&total=${finalBulkPrice}&discount=${bulkDiscount}`;
   };
 
@@ -443,13 +472,13 @@ const Classes = () => {
       setSelectedClasses([]);
     } else {
       // Select all filtered classes
-      const allIds = filteredClasses.map(cls => cls.id);
+      const allIds = filteredClasses.map((cls) => cls.id);
       setSelectedClasses(allIds);
     }
   };
 
   // Get unique categories
-  const categories = [...new Set(classes.map(c => c.category))];
+  const categories = [...new Set(classes.map((c) => c.category))];
 
   if (loading) {
     return (
@@ -460,7 +489,7 @@ const Classes = () => {
             <Skeleton className="h-16 w-64 mx-auto mb-8" />
             <Skeleton className="h-6 w-96 mx-auto mb-12" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3, 4, 5, 6].map(i => (
+              {[1, 2, 3, 4, 5, 6].map((i) => (
                 <Skeleton key={i} className="h-[500px] rounded-2xl" />
               ))}
             </div>
@@ -476,38 +505,42 @@ const Classes = () => {
       <Header />
 
       {/* Hero Section */}
-      <section 
+      <section
         className="relative pt-32 pb-20 overflow-hidden"
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${heroBackground})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/30 to-black/50" />
-        
+
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 text-sm font-semibold">
+            {/* <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 text-sm font-semibold">
               <Sparkles className="w-4 h-4 mr-2" />
               Premium Fitness Experience
-            </Badge>
-            
+            </Badge> */}
+
             <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight text-white">
-              Transform Your <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Fitness Journey</span>
+              Transform Your{" "}
+              <span className="bg-gradient-to-r from-purple-400 to-purple-400 bg-clip-text text-transparent">
+                Fitness Journey
+              </span>
             </h1>
-            
+
             <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Join Dr. Blossom and discover the joy of dance fitness with our 
-              high-energy Zumba classes, personalized training, and vibrant community.
+              Join Dr. Blossom and discover the joy of dance fitness with our
+              high-energy Zumba classes, personalized training, and vibrant
+              community.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-6 text-lg font-bold rounded-xl shadow-lg"
-                onClick={() => window.location.href = '#classes-grid'}
+                className="bg-gradient-to-r from-purple-600 to-purple-600 hover:from-purple-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-bold rounded-xl shadow-lg"
+                onClick={() => (window.location.href = "#classes-grid")}
               >
                 <Play className="w-5 h-5 mr-2" />
                 Browse Classes
@@ -515,8 +548,8 @@ const Classes = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg font-bold rounded-xl"
-                onClick={() => window.location.href = '/contact'}
+                className="border-2 border-white text-purple hover:bg-white/10 px-8 py-6 text-lg font-bold rounded-xl"
+                onClick={() => (window.location.href = "/contact")}
               >
                 Book Private Session
               </Button>
@@ -544,7 +577,7 @@ const Classes = () => {
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
               <div className="flex items-center gap-3">
                 <div className="p-3 bg-pink-100 rounded-xl">
-                  <Star className="w-6 h-6 text-pink-600" />
+                  <Star className="w-6 h-6 text-purple-600" />
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-gray-900">4.9</div>
@@ -588,11 +621,11 @@ const Classes = () => {
                   className="pl-10 w-full"
                 />
               </div>
-              
+
               <div className="flex items-center gap-3">
                 <Filter className="w-5 h-5 text-gray-500" />
                 <span className="text-sm text-gray-600">Sort by:</span>
-                <select 
+                <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                   className="px-4 py-2 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -606,28 +639,48 @@ const Classes = () => {
             </div>
 
             {/* Tabs */}
-            <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="mt-6">
+            <Tabs
+              defaultValue="all"
+              value={activeTab}
+              onValueChange={setActiveTab}
+              className="mt-6"
+            >
               <TabsList className="grid grid-cols-2 md:grid-cols-5 lg:flex gap-2">
-                <TabsTrigger value="all" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500">
+                <TabsTrigger
+                  value="all"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-500"
+                >
                   All Classes
                 </TabsTrigger>
-                <TabsTrigger value="virtual" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500">
+                <TabsTrigger
+                  value="virtual"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-500"
+                >
                   Virtual
                 </TabsTrigger>
-                <TabsTrigger value="in-person" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500">
+                <TabsTrigger
+                  value="in-person"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-500"
+                >
                   In-Person
                 </TabsTrigger>
-                <TabsTrigger value="hybrid" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500">
+                <TabsTrigger
+                  value="hybrid"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-500"
+                >
                   Hybrid
                 </TabsTrigger>
-                <TabsTrigger value="free" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500">
+                <TabsTrigger
+                  value="free"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-500"
+                >
                   Free Classes
                 </TabsTrigger>
-                {categories.slice(0, 3).map(category => (
-                  <TabsTrigger 
-                    key={category} 
+                {categories.slice(0, 3).map((category) => (
+                  <TabsTrigger
+                    key={category}
                     value={category.toLowerCase()}
-                    className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500"
+                    className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-500"
                   >
                     {category}
                   </TabsTrigger>
@@ -638,13 +691,14 @@ const Classes = () => {
 
           {/* Bulk Purchase Banner - IMPROVED */}
           {selectedClasses.length > 0 && (
-            <div className="mb-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-6 shadow-lg">
+            <div className="mb-8 bg-gradient-to-r from-purple-500 to-purple-500 rounded-2xl p-6 shadow-lg">
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="text-white">
                   <div className="flex items-center gap-3 mb-3">
                     <ShoppingCart className="w-6 h-6" />
                     <h3 className="text-xl font-bold">
-                      {selectedClasses.length} class{selectedClasses.length > 1 ? "es" : ""} selected
+                      {selectedClasses.length} class
+                      {selectedClasses.length > 1 ? "es" : ""} selected
                     </h3>
                     <Button
                       size="sm"
@@ -652,36 +706,48 @@ const Classes = () => {
                       className="text-white hover:bg-white/20"
                       onClick={selectAllClasses}
                     >
-                      {selectedClasses.length === filteredClasses.length ? "Deselect All" : "Select All"}
+                      {selectedClasses.length === filteredClasses.length
+                        ? "Deselect All"
+                        : "Select All"}
                     </Button>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <div className="flex items-center gap-3">
                       <span className="text-white/90">Subtotal:</span>
-                      <span className="text-xl font-bold">{formatPrice(totalBulkPrice)}</span>
+                      <span className="text-xl font-bold">
+                        {formatPrice(totalBulkPrice)}
+                      </span>
                     </div>
-                    
+
                     {bulkDiscount > 0 && (
                       <div className="flex items-center gap-3">
                         <Tag className="w-4 h-4" />
-                        <span className="text-white/90">Bulk Discount ({selectedClasses.length >= 5 ? '20%' : '10%'}):</span>
-                        <span className="text-xl font-bold text-green-300">-{formatPrice(bulkDiscount)}</span>
+                        <span className="text-white/90">
+                          Bulk Discount (
+                          {selectedClasses.length >= 5 ? "20%" : "10%"}):
+                        </span>
+                        <span className="text-xl font-bold text-green-300">
+                          -{formatPrice(bulkDiscount)}
+                        </span>
                       </div>
                     )}
-                    
+
                     <div className="pt-2 border-t border-white/20">
                       <div className="flex items-center gap-3">
                         <span className="text-white/90">Final Price:</span>
-                        <span className="text-2xl font-bold">{formatPrice(finalBulkPrice)}</span>
+                        <span className="text-2xl font-bold">
+                          {formatPrice(finalBulkPrice)}
+                        </span>
                       </div>
                       <p className="text-white/80 text-sm mt-1">
-                        Save {formatPrice(bulkDiscount)} by booking {selectedClasses.length} classes together!
+                        Save {formatPrice(bulkDiscount)} by booking{" "}
+                        {selectedClasses.length} classes together!
                       </p>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
                     size="lg"
@@ -709,18 +775,21 @@ const Classes = () => {
             {filteredClasses.map((classItem, index) => {
               const isFavorite = favorites.includes(classItem.id);
               const isSelected = selectedClasses.includes(classItem.id);
-              const classPrice = currency === "₦" 
-                ? Number(classItem.price.naira) 
-                : currency === "£"
-                ? Number(classItem.price.gbp)
-                : Number(classItem.price.usd);
+              const classPrice =
+                currency === "₦"
+                  ? Number(classItem.price.naira)
+                  : currency === "£"
+                  ? Number(classItem.price.gbp)
+                  : Number(classItem.price.usd);
               const isFree = classPrice === 0;
 
               return (
                 <div
                   key={classItem.id}
                   className={`group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 ${
-                    isSelected ? 'border-purple-500 ring-2 ring-purple-200' : 'border-gray-100'
+                    isSelected
+                      ? "border-purple-500 ring-2 ring-purple-200"
+                      : "border-gray-100"
                   } hover:border-purple-300`}
                 >
                   {/* Image Container */}
@@ -730,14 +799,17 @@ const Classes = () => {
                       alt={classItem.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    
+
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                    
+
                     {/* Top Actions */}
                     <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
                       <Badge className="bg-white/90 backdrop-blur-sm text-gray-800 font-semibold border-0">
-                        {classItem.type === "virtual" ? "Virtual" : 
-                         classItem.type === "hybrid" ? "Hybrid" : "In-Person"}
+                        {classItem.type === "virtual"
+                          ? "Virtual"
+                          : classItem.type === "hybrid"
+                          ? "Hybrid"
+                          : "In-Person"}
                       </Badge>
                       <div className="flex gap-2">
                         <button
@@ -747,30 +819,40 @@ const Classes = () => {
                           }}
                           className="p-2 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-colors"
                         >
-                          <Heart className={`w-4 h-4 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} />
+                          <Heart
+                            className={`w-4 h-4 ${
+                              isFavorite
+                                ? "fill-red-500 text-red-500"
+                                : "text-gray-600"
+                            }`}
+                          />
                         </button>
                         <button className="p-2 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-colors">
                           <Share2 className="w-4 h-4 text-gray-600" />
                         </button>
                       </div>
                     </div>
-                    
+
                     {/* Price Tag */}
                     <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
                       <div className="bg-black/70 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-bold">
                         {isFree ? "FREE" : formatPrice(classPrice)}
                       </div>
                     </div>
-                    
+
                     {/* Checkbox for selection */}
                     <div className="absolute bottom-4 left-4">
                       <div className="flex items-center gap-2">
                         <Checkbox
                           checked={isSelected}
-                          onCheckedChange={() => toggleClassSelection(classItem.id)}
+                          onCheckedChange={() =>
+                            toggleClassSelection(classItem.id)
+                          }
                           className="border-2 border-white data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"
                         />
-                        <span className="text-white text-sm font-medium">Select for bulk</span>
+                        <span className="text-white text-sm font-medium">
+                          Select for bulk
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -779,16 +861,37 @@ const Classes = () => {
                   <div className="p-6">
                     {/* Category & Level */}
                     <div className="flex justify-between items-center mb-4">
-                      <Badge variant="outline" className="text-purple-600 border-purple-200">
+                      <Badge
+                        variant="outline"
+                        className="text-purple-600 border-purple-200"
+                      >
                         {classItem.category}
                       </Badge>
-                      <Badge className={`
-                        ${classItem.level === 'Beginner' ? 'bg-green-100 text-green-800' : ''}
-                        ${classItem.level === 'Intermediate' ? 'bg-blue-100 text-blue-800' : ''}
-                        ${classItem.level === 'Advanced' ? 'bg-red-100 text-red-800' : ''}
-                        ${classItem.level === 'All Levels' ? 'bg-purple-100 text-purple-800' : ''}
+                      <Badge
+                        className={`
+                        ${
+                          classItem.level === "Beginner"
+                            ? "bg-green-100 text-green-800"
+                            : ""
+                        }
+                        ${
+                          classItem.level === "Intermediate"
+                            ? "bg-blue-100 text-blue-800"
+                            : ""
+                        }
+                        ${
+                          classItem.level === "Advanced"
+                            ? "bg-red-100 text-red-800"
+                            : ""
+                        }
+                        ${
+                          classItem.level === "All Levels"
+                            ? "bg-purple-100 text-purple-800"
+                            : ""
+                        }
                         border-0 font-semibold
-                      `}>
+                      `}
+                      >
                         {classItem.level}
                       </Badge>
                     </div>
@@ -812,18 +915,23 @@ const Classes = () => {
                           <MapPin className="w-4 h-4 mr-3 text-purple-500" />
                         )}
                         <span className="text-sm">
-                          {classItem.type === "virtual" ? "Virtual Class" : 
-                           classItem.location || "Location TBA"}
+                          {classItem.type === "virtual"
+                            ? "Virtual Class"
+                            : classItem.location || "Location TBA"}
                         </span>
                       </div>
                       <div className="flex items-center text-gray-600">
                         <Calendar className="w-4 h-4 mr-3 text-purple-500" />
                         <span className="text-sm">
-                          {new Date(classItem.date).toLocaleDateString('en-US', { 
-                            weekday: 'short', 
-                            month: 'short', 
-                            day: 'numeric' 
-                          })} at {classItem.time}
+                          {new Date(classItem.date).toLocaleDateString(
+                            "en-US",
+                            {
+                              weekday: "short",
+                              month: "short",
+                              day: "numeric",
+                            }
+                          )}{" "}
+                          at {classItem.time}
                         </span>
                       </div>
                       <div className="flex items-center justify-between">
@@ -847,7 +955,9 @@ const Classes = () => {
                           {isFree ? "FREE" : formatPrice(classPrice)}
                         </div>
                         <div className="text-xs text-gray-500">
-                          {isSelected ? "Selected for bulk purchase" : "per session"}
+                          {isSelected
+                            ? "Selected for bulk purchase"
+                            : "per session"}
                         </div>
                       </div>
                       <div className="flex gap-2">
@@ -855,23 +965,29 @@ const Classes = () => {
                           size="sm"
                           variant="outline"
                           className="border-gray-300 text-gray-700 hover:bg-gray-50"
-                          onClick={() => window.location.href = `/classes/${classItem.id}`}
+                          onClick={() =>
+                            (window.location.href = `/classes/${classItem.id}`)
+                          }
                         >
                           Details
                         </Button>
                         <Button
                           size="sm"
                           className={`
-                            ${isFree 
-                              ? 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white'
-                              : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white'
+                            ${
+                              isFree
+                                ? "bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white"
+                                : "bg-gradient-to-r from-purple-600 to-purple-600 hover:from-purple-700 hover:to-purple-700 text-white"
                             }
                           `}
                           onClick={() => handleBookClass(classItem)}
                           disabled={classItem.spotsAvailable === 0}
                         >
-                          {classItem.spotsAvailable === 0 ? "Sold Out" : 
-                           isFree ? "Join Free" : "Book Now"}
+                          {classItem.spotsAvailable === 0
+                            ? "Sold Out"
+                            : isFree
+                            ? "Join Free"
+                            : "Book Now"}
                         </Button>
                       </div>
                     </div>
@@ -891,14 +1007,15 @@ const Classes = () => {
                 No classes found
               </h3>
               <p className="text-gray-600 mb-8 max-w-md mx-auto">
-                Try adjusting your search or filter to find what you're looking for.
+                Try adjusting your search or filter to find what you're looking
+                for.
               </p>
               <Button
                 onClick={() => {
                   setSearchTerm("");
                   setActiveTab("all");
                 }}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                className="bg-gradient-to-r from-purple-600 to-purple-600 hover:from-purple-700 hover:to-purple-700 text-white"
               >
                 View All Classes
               </Button>
@@ -906,19 +1023,19 @@ const Classes = () => {
           )}
 
           {/* Membership CTA */}
-          <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-3xl p-12 text-center border border-purple-100">
+          <div className="bg-gradient-to-r from-purple-50 to-purple-50 rounded-3xl p-12 text-center border border-purple-100">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Want Unlimited Access?
             </h2>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-              Get access to all classes, exclusive content, and personalized coaching 
-              with our premium membership plans.
+              Get access to all classes, exclusive content, and personalized
+              coaching with our premium membership plans.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-6 text-lg font-bold rounded-xl shadow-lg"
-                onClick={() => window.location.href = '/membership'}
+                className="bg-gradient-to-r from-purple-600 to-purple-600 hover:from-purple-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-bold rounded-xl shadow-lg"
+                onClick={() => (window.location.href = "/membership")}
               >
                 View Membership Plans
                 <ChevronRight className="w-5 h-5 ml-2" />
@@ -927,7 +1044,7 @@ const Classes = () => {
                 size="lg"
                 variant="outline"
                 className="border-2 border-purple-600 text-purple-600 hover:bg-purple-50 px-8 py-6 text-lg font-bold rounded-xl"
-                onClick={() => window.location.href = '/contact'}
+                onClick={() => (window.location.href = "/contact")}
               >
                 Contact for Corporate
               </Button>

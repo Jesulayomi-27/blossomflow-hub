@@ -444,23 +444,23 @@ const VirtualClasses = () => {
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-pink-100 rounded-full blur-3xl opacity-50" />
 
           <div className="relative">
-            <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 text-sm font-semibold">
+            {/* <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 text-sm font-semibold">
               <Sparkles className="w-4 h-4 mr-2" />
               Premium Zumba® Experience
-            </Badge>
+            </Badge> */}
 
-            <h1 className="text-5xl md:text-7xl font-black mb-4 leading-tight bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-black mb-4 leading-tight bg-gradient-to-r from-purple-600  to-purple-600 bg-clip-text text-transparent">
               Premium Zumba®
               <br />
               Classes & Videos
             </h1>
 
             <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="h-1 w-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
+              <div className="h-1 w-12  bg-purple-500 rounded-full" />
               <h5 className="text-2xl font-black text-gray-800">
                 Ready to start your Zumba® journey?
               </h5>
-              <div className="h-1 w-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full" />
+              <div className="h-1 w-12 bg-purple-500 rounded-full" />
             </div>
 
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
@@ -470,52 +470,6 @@ const VirtualClasses = () => {
           </div>
 
           {/* Stats Banner */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-purple-100 rounded-xl">
-                  <Users className="w-6 h-6 text-purple-600" />
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-gray-900">2.5K+</div>
-                  <div className="text-sm text-gray-500">Active Members</div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-pink-100 rounded-xl">
-                  <Star className="w-6 h-6 text-pink-600" />
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-gray-900">4.9</div>
-                  <div className="text-sm text-gray-500">Avg Rating</div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-blue-100 rounded-xl">
-                  <Zap className="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-gray-900">50+</div>
-                  <div className="text-sm text-gray-500">Classes</div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-green-100 rounded-xl">
-                  <Award className="w-6 h-6 text-green-600" />
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-gray-900">100%</div>
-                  <div className="text-sm text-gray-500">Satisfaction</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Filters and Controls */}
@@ -537,37 +491,37 @@ const VirtualClasses = () => {
               <TabsList className="grid grid-cols-3 md:grid-cols-6 lg:flex gap-2">
                 <TabsTrigger
                   value="all"
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-500"
                 >
                   All
                 </TabsTrigger>
                 <TabsTrigger
                   value="free"
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-500"
                 >
                   Free
                 </TabsTrigger>
                 <TabsTrigger
                   value="virtual"
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-500"
                 >
                   Virtual
                 </TabsTrigger>
                 <TabsTrigger
                   value="in-person"
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-500"
                 >
                   In-Person
                 </TabsTrigger>
                 <TabsTrigger
                   value="hybrid"
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-500"
                 >
                   Hybrid
                 </TabsTrigger>
                 <TabsTrigger
                   value="zumba"
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-500"
                 >
                   Zumba
                 </TabsTrigger>
@@ -695,8 +649,8 @@ const VirtualClasses = () => {
                 </p>
 
                 {/* Instructor */}
-                <div className="flex items-center gap-3 mb-4 p-3 bg-gray-50 rounded-lg">
-                  <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold">
+                {/* <div className="flex items-center gap-3 mb-4 p-3 bg-gray-50 rounded-lg">
+                  <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-purple-700 rounded-full flex items-center justify-center text-white font-bold">
                     {classItem.instructor.charAt(0)}
                   </div>
                   <div>
@@ -705,22 +659,9 @@ const VirtualClasses = () => {
                       {classItem.instructor}
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Features */}
-                <div className="mb-4">
-                  <div className="text-sm text-gray-500 mb-2">Includes:</div>
-                  <div className="flex flex-wrap gap-2">
-                    {classItem.features?.slice(0, 2).map((feature, idx) => (
-                      <span
-                        key={idx}
-                        className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full"
-                      >
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                </div>
 
                 {/* Stats & Schedule */}
                 <div className="flex items-center justify-between mb-6 pt-4 border-t border-gray-100">
@@ -766,7 +707,7 @@ const VirtualClasses = () => {
                       ${
                         classItem.price.free
                           ? "bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white"
-                          : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                          : "bg-gradient-to-r from-purple-600  hover:from-purple-700 hover:to-purple-900 text-white"
                       }
                     `}
                   >
@@ -779,7 +720,7 @@ const VirtualClasses = () => {
         </div>
 
         {/* Premium Membership CTA */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 p-12 text-center text-white mb-16">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-600  to-purple-900 p-12 text-center text-white mb-16">
           <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-32 -translate-y-32 blur-3xl" />
           <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/10 rounded-full translate-x-32 translate-y-32 blur-3xl" />
 
@@ -823,7 +764,7 @@ const VirtualClasses = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg font-bold rounded-xl"
+                className="border-2 border-white text-black hover:bg-white/10 px-8 py-6 text-lg font-bold rounded-xl"
                 onClick={() => (window.location.href = "/contact")}
               >
                 Book Private Session
@@ -835,11 +776,11 @@ const VirtualClasses = () => {
         {/* Final CTA */}
         <div className="text-center">
           <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-12 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
+            <div className="w-12 h-1 bg-gradient-to-r from-purple-500 to-purple-500 rounded-full" />
             <div className="text-sm font-semibold text-gray-600 uppercase tracking-wider">
               Start Your Journey Today
             </div>
-            <div className="w-12 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full" />
+            <div className="w-12 h-1 bg-gradient-to-r from-purple-500 to-purple-500 rounded-full" />
           </div>
 
           <h3 className="text-3xl font-bold text-gray-900 mb-4">
@@ -854,7 +795,7 @@ const VirtualClasses = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-6 text-lg font-bold rounded-xl shadow-lg"
+              className="bg-gradient-to-r from-purple-600 to-purple-600 hover:from-purple-700 hover:to-purple-900 text-white px-8 py-6 text-lg font-bold rounded-xl shadow-lg"
               onClick={() =>
                 (window.location.href = isAuthenticated
                   ? "/dashboard"

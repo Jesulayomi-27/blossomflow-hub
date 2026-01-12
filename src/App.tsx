@@ -27,6 +27,7 @@ import Classes from "./pages/Classes";
 import Events from "./pages/Events";
 import VirtualClasses from "./pages/VirtualClasses";
 import OrderConfirmation from "./pages/OrderConfirmation";
+import PaymentCallback from "./pages/PaymentCallback";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,7 @@ const App = () => (
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/payment/callback" element={<PaymentCallback />} />
                 <Route
                   path="/dashboard"
                   element={

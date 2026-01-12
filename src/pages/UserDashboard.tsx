@@ -371,7 +371,7 @@ const UserDashboard = () => {
             <div className="flex gap-3">
               <Button
                 variant="outline"
-                className="border-white/30 text-white hover:bg-white/10"
+                className="border-white/30 text-purple hover:bg-white/10"
                 onClick={() => (window.location.href = "/profile/edit")}
               >
                 <Edit className="w-4 h-4 mr-2" />
@@ -379,7 +379,7 @@ const UserDashboard = () => {
               </Button>
               <Button
                 variant="outline"
-                className="border-white/30 text-white hover:bg-white/10"
+                className="border-white/30 text-purple hover:bg-white/10"
                 onClick={handleLogout}
               >
                 <LogOut className="w-4 h-4 mr-2" />
@@ -551,7 +551,7 @@ const UserDashboard = () => {
                           </div>
                           <Button
                             variant="outline"
-                            className="border-white text-white hover:bg-white/10"
+                            className="border-white text-black hover:bg-white/10"
                             onClick={() =>
                               (window.location.href = "/achievements")
                             }

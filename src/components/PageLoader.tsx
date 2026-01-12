@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
-import logo from "@/assets/logo_dark_mode_cream_color.png";
+import logo from "@/assets/purple_logo.png";
 
 const PageLoader = () => {
   const [isLoading, setIsLoading] = useState(true);

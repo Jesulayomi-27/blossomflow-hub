@@ -56,7 +56,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { state: cartState, getTotalPrice, clearCart } = useCart();
   const { toast } = useToast();
-  const { formatPrice, currency } = useCurrency();
+  const { formatPrice, currency: currencyFromHook } = useCurrency();
   const { user, isAuthenticated } = useAuth();
 
   const [loading, setLoading] = useState(false);
@@ -182,7 +182,74 @@ const Checkout = () => {
   const shipping = getShipping();
   const total = getTotal();
 
-  const symbols = { usd: "$", naira: "₦", gbp: "£" };
+  // Helper functions to handle currency consistently
+  const getCurrencySymbol = () => {
+    // Check if currency is a symbol
+    if (
+      currencyFromHook === "₦" ||
+      currencyFromHook === "$" ||
+      currencyFromHook === "£"
+    ) {
+      return currencyFromHook;
+    }
+    // Check if currency is a code
+    if (currencyFromHook === "naira") return "₦";
+    if (currencyFromHook === "usd") return "$";
+    if (currencyFromHook === "gbp") return "£";
+    // Default fallback
+    return "$";
+  };
+
+  const getCurrencyCode = () => {
+    // Check if currency is a symbol
+    if (currencyFromHook === "₦") return "NGN";
+    if (currencyFromHook === "$") return "USD";
+    if (currencyFromHook === "£") return "GBP";
+    // Check if currency is a code
+    if (currencyFromHook === "naira") return "NGN";
+    if (currencyFromHook === "usd") return "USD";
+    if (currencyFromHook === "gbp") return "GBP";
+    // Default fallback
+    return "USD";
+  };
+
+  const isNaira = () => {
+    return currencyFromHook === "₦" || currencyFromHook === "naira";
+  };
+
+  const currencySymbol = getCurrencySymbol();
+  const currencyCode = getCurrencyCode();
+  const isCurrencyNaira = isNaira();
+
+  // Helper to get price from item based on currency
+  const getItemPrice = (item: any) => {
+    if (isClassCheckout) {
+      return item.price;
+    }
+
+    // For cart items, handle both possible currency formats
+    const currencyKey = cartState.currency;
+
+    // Check if price is an object with currency keys
+    if (typeof item.price === "object") {
+      // Try different possible key formats
+      if (item.price[currencyKey] !== undefined) {
+        return item.price[currencyKey];
+      }
+      // Try with symbol if currencyKey is a code
+      if (currencyKey === "usd" && item.price["$"] !== undefined)
+        return item.price["$"];
+      if (currencyKey === "naira" && item.price["₦"] !== undefined)
+        return item.price["₦"];
+      if (currencyKey === "gbp" && item.price["£"] !== undefined)
+        return item.price["£"];
+      // Fallback to first value
+      return Object.values(item.price)[0] as number;
+    }
+
+    // If price is a number, use it directly
+    return item.price;
+  };
 
   const handleApplyPromo = () => {
     const promos: Record<string, number> = {
@@ -219,18 +286,15 @@ const Checkout = () => {
 
   // Get recommended payment gateway based on currency
   const getRecommendedGateway = () => {
-    if (currency === "₦") return "paystack";
+    if (isCurrencyNaira) return "paystack";
     return "paypal"; // USD and GBP use PayPal
   };
 
-  // Helper to get currency code
-  const getCurrencyCode = () => {
-    if (currency === "₦") return "NGN";
-    if (currency === "$") return "USD";
-    return "GBP";
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const isNaira = currency === "₦";
+    // Check if user is authenticated
+    if (!isAuthenticated || !user) {
       toast({
         title: "Login Required",
         description: "Please login to complete your purchase",
@@ -244,14 +308,17 @@ const Checkout = () => {
 
     try {
       const orderReference = `ORDER-${Date.now()}`;
-      const amountInSmallestUnit = currency === "naira" ? total * 100 : total * 100; // Convert to kobo/cents
-      
-      if (paymentMethod === "paystack" || (paymentMethod === "card" && currency === "naira")) {
+      const amountInSmallestUnit = isCurrencyNaira ? total * 100 : total * 100; // Convert to kobo/cents
+
+      if (
+        paymentMethod === "paystack" ||
+        (paymentMethod === "card" && isCurrencyNaira)
+      ) {
         // Use Paystack for Naira payments
         const paymentData = {
           email: formData.email || user?.email || "",
           amount: amountInSmallestUnit,
-          currency: currency === "naira" ? "NGN" : "USD",
+          currency: currencyCode,
           reference: orderReference,
           callback_url: `${window.location.origin}/payment/callback?gateway=paystack`,
           metadata: {
@@ -261,21 +328,30 @@ const Checkout = () => {
           },
         };
 
-        const response = await apiService.initializePaystackPayment(paymentData);
-        
+        const response = await apiService.initializePaystackPayment(
+          paymentData
+        );
+
         if (response.success && response.authorization_url) {
           // Redirect to Paystack payment page
           window.location.href = response.authorization_url;
           return;
         } else {
-          throw new Error(response.message || "Failed to initialize Paystack payment");
+          throw new Error(
+            response.message || "Failed to initialize Paystack payment"
+          );
         }
-      } else if (paymentMethod === "paypal" || (paymentMethod === "card" && currency !== "naira")) {
+      } else if (
+        paymentMethod === "paypal" ||
+        (paymentMethod === "card" && !isCurrencyNaira)
+      ) {
         // Use PayPal for USD/GBP payments
         const paymentData = {
           amount: total,
-          currency: currency === "usd" ? "USD" : "GBP",
-          description: isClassCheckout ? "Class Subscription" : "Product Purchase",
+          currency: currencyCode,
+          description: isClassCheckout
+            ? "Class Subscription"
+            : "Product Purchase",
           return_url: `${window.location.origin}/payment/callback?gateway=paypal`,
           cancel_url: `${window.location.origin}/checkout`,
           metadata: {
@@ -286,21 +362,25 @@ const Checkout = () => {
         };
 
         const response = await apiService.initializePayPalPayment(paymentData);
-        
+
         if (response.success && response.authorization_url) {
           // Redirect to PayPal payment page
           window.location.href = response.authorization_url;
           return;
         } else {
-          throw new Error(response.message || "Failed to initialize PayPal payment");
+          throw new Error(
+            response.message || "Failed to initialize PayPal payment"
+          );
         }
       } else if (paymentMethod === "bank") {
         // Bank transfer - show bank details
         toast({
           title: "Bank Transfer Details",
-          description: "Please transfer to: Bank Name, Account: XXXXXXXXXX, Reference: " + orderReference,
+          description:
+            "Please transfer to: Bank Name, Account: XXXXXXXXXX, Reference: " +
+            orderReference,
         });
-        
+
         // Create pending order
         if (isClassCheckout) {
           const classIds = classCheckoutItems.map((item) => item.id);
@@ -317,7 +397,10 @@ const Checkout = () => {
       console.error("Checkout error:", error);
       toast({
         title: "Payment Failed",
-        description: error instanceof Error ? error.message : "Unable to process payment. Please try again.",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Unable to process payment. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -539,7 +622,7 @@ const Checkout = () => {
                           />
                         </div>
                         <div>
-                          <Label htmlFor="postalCode" className="text-gray700">
+                          <Label htmlFor="postalCode" className="text-gray-700">
                             Postal Code *
                           </Label>
                           <Input
@@ -577,12 +660,14 @@ const Checkout = () => {
                       <CreditCard className="mr-3 h-5 w-5" />
                       Payment Method
                     </h2>
-                    
+
                     {/* Currency-based recommendation */}
                     <div className="mb-4 p-3 bg-purple-50 border border-purple-200 rounded-lg">
                       <p className="text-sm text-purple-800">
-                        <strong>Recommended:</strong> Based on your currency ({getCurrencyCode()}), 
-                        we recommend {isNaira ? "Paystack" : "PayPal"} for the best experience.
+                        <strong>Recommended:</strong> Based on your currency (
+                        {currencyCode}), we recommend{" "}
+                        {isCurrencyNaira ? "Paystack" : "PayPal"} for the best
+                        experience.
                       </p>
                     </div>
 
@@ -592,42 +677,64 @@ const Checkout = () => {
                       className="space-y-3"
                     >
                       {/* Paystack - Recommended for Naira */}
-                      <div className={`flex items-center space-x-3 p-3 border rounded-lg transition-colors ${
-                        isNaira ? "border-[#8026d9] bg-purple-50" : "border-gray-200 hover:border-[#8026d9]"
-                      }`}>
+                      <div
+                        className={`flex items-center space-x-3 p-3 border rounded-lg transition-colors ${
+                          isCurrencyNaira
+                            ? "border-[#8026d9] bg-purple-50"
+                            : "border-gray-200 hover:border-[#8026d9]"
+                        }`}
+                      >
                         <RadioGroupItem
                           value="paystack"
                           id="paystack"
                           className="text-[#8026d9]"
                         />
-                        <Label htmlFor="paystack" className="flex-1 cursor-pointer">
+                        <Label
+                          htmlFor="paystack"
+                          className="flex-1 cursor-pointer"
+                        >
                           <div className="flex items-center justify-between">
                             <span>Paystack</span>
-                            {isNaira && (
-                              <span className="text-xs bg-[#8026d9] text-white px-2 py-0.5 rounded-full">Recommended</span>
+                            {isCurrencyNaira && (
+                              <span className="text-xs bg-[#8026d9] text-white px-2 py-0.5 rounded-full">
+                                Recommended
+                              </span>
                             )}
                           </div>
-                          <span className="text-xs text-gray-500">Card, Bank Transfer, USSD</span>
+                          <span className="text-xs text-gray-500">
+                            Card, Bank Transfer, USSD
+                          </span>
                         </Label>
                       </div>
 
                       {/* PayPal - Recommended for USD/GBP */}
-                      <div className={`flex items-center space-x-3 p-3 border rounded-lg transition-colors ${
-                        !isNaira ? "border-[#8026d9] bg-purple-50" : "border-gray-200 hover:border-[#8026d9]"
-                      }`}>
+                      <div
+                        className={`flex items-center space-x-3 p-3 border rounded-lg transition-colors ${
+                          !isCurrencyNaira
+                            ? "border-[#8026d9] bg-purple-50"
+                            : "border-gray-200 hover:border-[#8026d9]"
+                        }`}
+                      >
                         <RadioGroupItem
                           value="paypal"
                           id="paypal"
                           className="text-[#8026d9]"
                         />
-                        <Label htmlFor="paypal" className="flex-1 cursor-pointer">
+                        <Label
+                          htmlFor="paypal"
+                          className="flex-1 cursor-pointer"
+                        >
                           <div className="flex items-center justify-between">
                             <span>PayPal</span>
-                            {!isNaira && (
-                              <span className="text-xs bg-[#8026d9] text-white px-2 py-0.5 rounded-full">Recommended</span>
+                            {!isCurrencyNaira && (
+                              <span className="text-xs bg-[#8026d9] text-white px-2 py-0.5 rounded-full">
+                                Recommended
+                              </span>
                             )}
                           </div>
-                          <span className="text-xs text-gray-500">PayPal, Credit/Debit Card</span>
+                          <span className="text-xs text-gray-500">
+                            PayPal, Credit/Debit Card
+                          </span>
                         </Label>
                       </div>
 
@@ -640,7 +747,9 @@ const Checkout = () => {
                         />
                         <Label htmlFor="bank" className="flex-1 cursor-pointer">
                           <span>Direct Bank Transfer</span>
-                          <span className="block text-xs text-gray-500">Manual transfer (may take 24-48hrs to confirm)</span>
+                          <span className="block text-xs text-gray-500">
+                            Manual transfer (may take 24-48hrs to confirm)
+                          </span>
                         </Label>
                       </div>
                     </RadioGroup>
@@ -756,7 +865,8 @@ const Checkout = () => {
                                     </Badge>
                                   </div>
                                   <span className="font-bold text-[#9902f7]">
-                                    ${classItem.price}
+                                    {currencySymbol}
+                                    {classItem.price}
                                   </span>
                                 </div>
 
@@ -796,35 +906,38 @@ const Checkout = () => {
                           </div>
                         ) : (
                           // Product items display
-                          cartState.items.map((item) => (
-                            <div
-                              key={item.id}
-                              className="flex items-center space-x-3"
-                            >
-                              <img
-                                src={item.image}
-                                alt={item.name}
-                                className="w-16 h-16 object-cover rounded-lg"
-                              />
-                              <div className="flex-1">
-                                <h4 className="font-medium text-gray-900">
-                                  {item.name}
-                                </h4>
-                                <p className="text-sm text-gray-600">
-                                  Qty: {item.quantity}
-                                </p>
+                          cartState.items.map((item) => {
+                            const itemPrice = getItemPrice(item);
+                            const itemTotal = itemPrice * item.quantity;
+
+                            return (
+                              <div
+                                key={item.id}
+                                className="flex items-center space-x-3"
+                              >
+                                <img
+                                  src={item.image}
+                                  alt={item.name}
+                                  className="w-16 h-16 object-cover rounded-lg"
+                                />
+                                <div className="flex-1">
+                                  <h4 className="font-medium text-gray-900">
+                                    {item.name}
+                                  </h4>
+                                  <p className="text-sm text-gray-600">
+                                    Qty: {item.quantity}
+                                  </p>
+                                </div>
+                                <span className="font-bold text-[#9902f7]">
+                                  {currencySymbol}
+                                  {itemTotal.toLocaleString("en-US", {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                  })}
+                                </span>
                               </div>
-                              <span className="font-bold text-[#9902f7]">
-                                {symbols[cartState.currency]}
-                                {(
-                                  item.price[cartState.currency] * item.quantity
-                                ).toLocaleString("en-US", {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                })}
-                              </span>
-                            </div>
-                          ))
+                            );
+                          })
                         )}
                       </div>
 
@@ -871,7 +984,7 @@ const Checkout = () => {
                         <div className="flex justify-between">
                           <span className="text-gray-600">Subtotal</span>
                           <span className="font-medium">
-                            {symbols[cartState.currency]}
+                            {currencySymbol}
                             {subtotal.toLocaleString("en-US", {
                               minimumFractionDigits: 2,
                               maximumFractionDigits: 2,
@@ -884,7 +997,7 @@ const Checkout = () => {
                           <div className="flex justify-between text-green-600">
                             <span>Bulk Discount</span>
                             <span className="font-medium">
-                              -$
+                              -{currencySymbol}
                               {bulkDiscount.toLocaleString("en-US", {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2,
@@ -897,7 +1010,7 @@ const Checkout = () => {
                           <div className="flex justify-between text-green-600">
                             <span>Promo Discount</span>
                             <span className="font-medium">
-                              -{symbols[cartState.currency]}
+                              -{currencySymbol}
                               {(subtotal * discount).toLocaleString("en-US", {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2,
@@ -918,7 +1031,7 @@ const Checkout = () => {
                         <div className="flex justify-between">
                           <span className="text-gray-600">Tax</span>
                           <span className="font-medium">
-                            {symbols[cartState.currency]}
+                            {currencySymbol}
                             {tax.toLocaleString("en-US", {
                               minimumFractionDigits: 2,
                               maximumFractionDigits: 2,
@@ -942,14 +1055,14 @@ const Checkout = () => {
                         </div>
                         <div className="text-right">
                           <div className="text-3xl font-bold bg-gradient-to-r from-[#9902f7] to-[#667eea] bg-clip-text text-transparent">
-                            {symbols[cartState.currency]}
+                            {currencySymbol}
                             {total.toLocaleString("en-US", {
                               minimumFractionDigits: 2,
                               maximumFractionDigits: 2,
                             })}
                           </div>
                           <div className="text-sm text-gray-600">
-                            {cartState.currency.toUpperCase()}
+                            {currencyCode}
                           </div>
                         </div>
                       </div>
@@ -984,9 +1097,7 @@ const Checkout = () => {
                             isClassCheckout
                               ? "Subscribe to Classes"
                               : "Place Order"
-                          } - ${
-                            symbols[cartState.currency]
-                          }${total.toLocaleString("en-US", {
+                          } - ${currencySymbol}${total.toLocaleString("en-US", {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })}`

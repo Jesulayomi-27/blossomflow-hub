@@ -66,7 +66,7 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-              <Link to="/newsletter">
+              <Link to="https://www.zumba.com/en-US/p/blossom-maduafokwa/1426095">
                 <Button
                   size="default"
                   className="bg-white text-primary hover:bg-creamish/90 text-sm md:text-lg group shadow-lg w-full sm:w-auto"

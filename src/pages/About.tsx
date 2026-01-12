@@ -206,7 +206,7 @@ const About = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-br from-purple-900 via-gray-900 to-black">
+      <section className="relative pt-32 pb-20 overflow-hidden bg-gradient-from-r from-purple-100 via-purple-200 to-purple-400">
         <div className="absolute inset-0">
           <div
             className="absolute inset-0 opacity-30"
@@ -221,16 +221,16 @@ const About = () => {
 
         <div className="relative z-10 container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <AnimatedSection animation="fade">
-              <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 text-sm font-semibold">
+            {/* <AnimatedSection animation="fade">
+              <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-500 text-white border-0 text-sm font-semibold">
                 <Sparkles className="w-4 h-4 mr-2" />
                 About Blossom's Fitness Hub
               </Badge>
-            </AnimatedSection>
+            </AnimatedSection> */}
 
             <AnimatedSection animation="slide-up" delay={0.2}>
               <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-purple-400 via-purple-400 to-purple-400 bg-clip-text text-transparent">
                   Dance. Heal. Transform.
                 </span>
               </h1>
@@ -247,7 +247,7 @@ const About = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-6 text-lg font-bold rounded-xl shadow-lg"
+                  className="bg-gradient-to-r from-purple-600 to-purple-600 hover:from-purple-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-bold rounded-xl shadow-lg"
                   onClick={() => (window.location.href = "/classes")}
                 >
                   Join Our Classes
@@ -255,7 +255,7 @@ const About = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg font-bold rounded-xl"
+                  className="border-2 border-white text-purple hover:bg-white/10 px-8 py-6 text-lg font-bold rounded-xl"
                   onClick={() => (window.location.href = "/contact")}
                 >
                   Contact Us
@@ -311,14 +311,14 @@ const About = () => {
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                  <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-purple-600 to-purple-600 bg-clip-text text-transparent">
                     About Blossom's Fitness Hub
                   </span>
                 </h2>
-                <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-8" />
+                <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-purple-500 mx-auto rounded-full mb-8" />
               </div>
 
-              <Card className="p-8 md:p-12 bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-100 shadow-xl">
+              <Card className="p-8 md:p-12 bg-gradient-to-br from-purple-50 to-purple-50 border border-purple-100 shadow-xl">
                 <div className="prose prose-lg max-w-none text-gray-700">
                   <p className="text-xl font-semibold text-gray-900 mb-6">
                     Blossom's Fitness Hub was founded by Dr. Blossom Maduafokwa,
@@ -371,7 +371,7 @@ const About = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 </div>
 
-                <div className="absolute -bottom-6 -right-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6 rounded-2xl shadow-xl">
+                <div className="absolute -bottom-6 -right-6 bg-gradient-to-r from-purple-600 to-purple-600 text-white p-6 rounded-2xl shadow-xl">
                   <div className="text-3xl font-bold">6+ Years</div>
                   <div className="text-sm opacity-90">
                     Of Transformative Impact
@@ -380,7 +380,7 @@ const About = () => {
               </div>
 
               <div>
-                <Badge className="mb-4 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0">
+                <Badge className="mb-4 px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-500 text-white border-0">
                   Founder Bio
                 </Badge>
 
@@ -452,7 +452,7 @@ const About = () => {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 bg-gradient-to-br from-purple-900 via-gray-900 to-black text-white">
+      <section className="py-20 bg-gradient-to-r   from-purple-600  to-purple-900 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection animation="fade">
@@ -470,7 +470,7 @@ const About = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <AnimatedSection animation="slide-right" delay={0.2}>
                 <Card className="p-8 h-full bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all group">
-                  <div className="p-4 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl w-fit mb-6">
+                  <div className="p-4 bg-gradient-to-br from-purple-500/20 to-purple-500/20 rounded-2xl w-fit mb-6">
                     <TargetIcon className="w-8 h-8 text-purple-300" />
                   </div>
                   <h3 className="text-2xl font-bold mb-4 text-white">
@@ -489,8 +489,8 @@ const About = () => {
 
               <AnimatedSection animation="slide-left" delay={0.3}>
                 <Card className="p-8 h-full bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all group">
-                  <div className="p-4 bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-2xl w-fit mb-6">
-                    <VisionIcon className="w-8 h-8 text-pink-300" />
+                  <div className="p-4 bg-gradient-to-br from-purple-500/20 to-purple-500/20 rounded-2xl w-fit mb-6">
+                    <VisionIcon className="w-8 h-8 text-purple-300" />
                   </div>
                   <h3 className="text-2xl font-bold mb-4 text-white">
                     Vision Statement
@@ -514,7 +514,7 @@ const About = () => {
           <AnimatedSection animation="fade">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-purple-600 to-purple-600 bg-clip-text text-transparent">
                   Our Core Values
                 </span>
               </h2>
@@ -555,7 +555,7 @@ const About = () => {
           <AnimatedSection animation="fade">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-purple-600 to-purple-600 bg-clip-text text-transparent">
                   Our Journey
                 </span>
               </h2>
@@ -567,7 +567,7 @@ const About = () => {
 
           <div className="max-w-4xl mx-auto relative">
             {/* Timeline line */}
-            <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 via-pink-500 to-purple-500" />
+            {/* <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 via-purple-500 to-purple-500" /> */}
 
             {timeline.map((item, index) => (
               <AnimatedSection
@@ -582,10 +582,10 @@ const About = () => {
                 >
                   {/* Year circle */}
                   <div className="relative z-10">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 text-white flex items-center justify-center font-bold text-lg shadow-xl">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-xl">
                       {item.year}
                     </div>
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 animate-ping opacity-20" />
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600 to-purple-600 animate-ping opacity-20" />
                   </div>
 
                   {/* Content */}
@@ -617,7 +617,7 @@ const About = () => {
           <AnimatedSection animation="fade">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-purple-600 to-purple-600 bg-clip-text text-transparent">
                   Meet the Hub
                 </span>
               </h2>
@@ -647,7 +647,7 @@ const About = () => {
                     <h3 className="text-xl font-bold text-gray-900 mb-1">
                       {member.name}
                     </h3>
-                    <Badge className="mb-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0">
+                    <Badge className="mb-3 bg-gradient-to-r from-purple-500 to-purple-500 text-white border-0">
                       {member.role}
                     </Badge>
                     <p className="text-gray-600 text-sm">
@@ -663,7 +663,7 @@ const About = () => {
             <div className="text-center mt-12">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-6 text-lg font-bold rounded-xl shadow-lg"
+                className="bg-gradient-to-r from-purple-600 to-purple-600 hover:from-purple-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-bold rounded-xl shadow-lg"
                 onClick={() => (window.location.href = "/contact")}
               >
                 Join Our Team
@@ -678,7 +678,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <AnimatedSection animation="fade">
             <div className="max-w-4xl mx-auto text-center">
-              <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0">
+              <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-500 text-white border-0">
                 <Sparkles className="w-4 h-4 mr-2" />
                 Ready to Transform?
               </Badge>
@@ -703,7 +703,7 @@ const About = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg font-bold rounded-xl"
+                  className="border-2 border-white text-purple hover:bg-white/10 px-8 py-6 text-lg font-bold rounded-xl"
                   onClick={() => (window.location.href = "/contact")}
                 >
                   Get In Touch

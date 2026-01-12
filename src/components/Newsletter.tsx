@@ -96,7 +96,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-hero relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-r from-purple-500 via-purple-700 to-purple-900 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-10 left-1/4 w-20 h-20 bg-white/10 rounded-full blur-xl animate-float"></div>
@@ -218,10 +218,10 @@ const Newsletter = () => {
 
           {/* Social Proof */}
           <div className="mt-12 flex flex-wrap justify-center items-center gap-8 text-white/60 text-sm">
-            <div className="flex items-center space-x-2">
+            {/* <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
               <span>{subscriberCount.toLocaleString()} subscribers</span>
-            </div>
+            </div> */}
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
               <span>Weekly newsletter</span>

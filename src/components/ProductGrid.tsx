@@ -786,23 +786,23 @@ const ProductGrid = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-gradient-to-r from-[#9902f7]/10 via-[#667eea]/10 to-[#00d4ff]/10 mb-6 animate-gradient-x">
+            {/* <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-gradient-to-r from-[#9902f7]/10 via-[#667eea]/10 to-[#00d4ff]/10 mb-6 animate-gradient-x">
               <Sparkles className="h-4 w-4 text-[#9902f7] mr-2 animate-pulse" />
               <span className="text-sm font-semibold text-[#9902f7]">
                 PREMIUM COLLECTION
               </span>
               <Sparkles className="h-4 w-4 text-[#00d4ff] ml-2 animate-pulse" />
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
-              <span className="bg-gradient-to-r from-[#9902f7] via-[#667eea] to-[#00d4ff] bg-clip-text text-transparent animate-gradient-x">
+            </div> */}
+
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8">
+              <span className="bg-gradient-to-r from-purple-600 via-[#9902f7] to-purple-500 bg-clip-text text-transparent">
                 Elite Fitness
               </span>
               <br />
-              <span className="text-foreground relative">
+              <span className="bg-gradient-to-r from-purple-600 via-[#9902f7] to-purple-500 bg-clip-text text-transparent">
                 Essentials
-                <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#9902f7] via-[#667eea] to-[#00d4ff] rounded-full"></span>
               </span>
-            </h2>
+            </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in">
               Curated selection of high-performance gear designed for athletes
               who demand excellence.
@@ -826,7 +826,7 @@ const ProductGrid = () => {
                         "rounded-full transition-all duration-300 px-4 py-1.5 mx-1",
                         "border border-transparent",
                         state.currency === curr
-                          ? "bg-gradient-to-r from-[#9902f7] to-[#667eea] text-white shadow-lg scale-105 relative overflow-hidden"
+                          ? "bg-gradient-to-r from-[#9902f7] to-[#9902f7] text-white shadow-lg scale-105 relative overflow-hidden"
                           : "bg-white/5 text-gray-300 hover:bg-white/10 hover:border-white/20 hover:text-gray-100"
                       )}
                     >
@@ -852,7 +852,7 @@ const ProductGrid = () => {
                     className={cn(
                       "rounded-full transition-all duration-300 px-3",
                       viewMode === "grid"
-                        ? "bg-gradient-to-r from-[#9902f7] to-[#667eea] text-white"
+                        ? "bg-gradient-to-r from-[#9902f7] to-[#9902f7] text-white"
                         : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-gray-100"
                     )}
                   >
@@ -865,7 +865,7 @@ const ProductGrid = () => {
                     className={cn(
                       "rounded-full transition-all duration-300 px-3",
                       viewMode === "list"
-                        ? "bg-gradient-to-r from-[#9902f7] to-[#667eea] text-white"
+                        ? "bg-gradient-to-r from-[#9902f7] to-[##9902f7] text-white"
                         : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-gray-100"
                     )}
                   >
@@ -965,13 +965,13 @@ const ProductGrid = () => {
                           {product.category}
                         </p>
                         <div className="flex items-center justify-between mt-2">
-                          <span className="font-bold text-sm bg-gradient-to-r from-[#9902f7] to-[#667eea] bg-clip-text text-transparent">
+                          <span className="font-bold text-sm bg-gradient-to-r from-[#9902f7] to-[#9902f7] bg-clip-text text-transparent">
                             {formatPrice(product.price)}
                           </span>
                           <div className="flex items-center gap-2">
                             <Button
                               size="sm"
-                              className="h-8 text-xs bg-gradient-to-r from-[#9902f7] to-[#667eea] text-white hover:opacity-90"
+                              className="h-8 text-xs bg-gradient-to-r from-[#9902f7] to-[#9902f7] text-white hover:opacity-90"
                               onClick={() => handleAddToCart(product)}
                             >
                               <ShoppingCart className="h-3 w-3 mr-1" />
@@ -1050,10 +1050,10 @@ const ProductGrid = () => {
                 onMouseLeave={() => setHoveredCard(null)}
               >
                 {/* Animated Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#9902f7]/0 via-[#667eea]/0 to-[#00d4ff]/0 group-hover:from-[#9902f7]/5 group-hover:via-[#667eea]/5 group-hover:to-[#00d4ff]/5 transition-all duration-1000 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#9902f7]/0 via-[#9902f7]/0 to-[#9902f7]/0 group-hover:from-[#9902f7]/5 group-hover:via-[#9902f7]/5 group-hover:to-[#9902f7]/5 transition-all duration-1000 pointer-events-none"></div>
 
                 {/* Animated Border */}
-                <div className="absolute inset-0 rounded-3xl p-[2px] bg-gradient-to-r from-[#9902f7] via-[#667eea] to-[#00d4ff] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div className="absolute inset-0 rounded-3xl p-[2px] bg-gradient-to-r from-[#9902f7] via-[#9902f7] to-[#9902f7] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                   <div className="w-full h-full bg-white rounded-3xl"></div>
                 </div>
 
@@ -1232,7 +1232,7 @@ const ProductGrid = () => {
                   {/* Price & Add to Cart */}
                   <div className="flex items-center justify-between pt-4">
                     <div className="space-y-0.5">
-                      <span className="text-lg font-black bg-gradient-to-r from-[#9902f7] to-[#667eea] bg-clip-text text-transparent">
+                      <span className="text-md font-black bg-gradient-to-r from-[#9902f7] to-[#9902f7] bg-clip-text text-transparent">
                         {formatPrice(product.price)}
                       </span>
                       {product.originalPrice && (
@@ -1250,9 +1250,9 @@ const ProductGrid = () => {
                         className={cn(
                           "rounded-l-full rounded-r-none px-6 py-3 transition-all duration-500",
                           "relative overflow-hidden group/btn",
-                          "shadow-xl hover:shadow-2xl hover:shadow-[#9902f7]/30",
+                          "shadow-xl hover:shadow-2xl hover:shadow-[#9902f7]/30 ml-2",
                           product.inStock
-                            ? "bg-gradient-to-r from-[#9902f7] via-[#667eea] to-[#00d4ff] text-white hover:scale-105"
+                            ? "bg-gradient-to-r from-[#9902f7] via-[#9902f7] to-[#9902f7] text-white hover:scale-105"
                             : "bg-gray-100 text-gray-400 cursor-not-allowed"
                         )}
                         disabled={!product.inStock}
@@ -1289,7 +1289,7 @@ const ProductGrid = () => {
                     {Array.from({ length: 15 }).map((_, i) => (
                       <div
                         key={i}
-                        className="absolute w-1 h-1 bg-gradient-to-r from-[#9902f7] to-[#00d4ff] rounded-full animate-float"
+                        className="absolute w-1 h-1 bg-gradient-to-r from-[#9902f7] to-[#9902f7] rounded-full animate-float"
                         style={{
                           left: `${Math.random() * 100}%`,
                           top: `${Math.random() * 100}%`,
@@ -1309,7 +1309,7 @@ const ProductGrid = () => {
           {/* View All Button */}
           <div className="text-center mt-20 animate-slide-up">
             <Button
-              className="group rounded-full bg-gradient-to-r from-[#9902f7] via-[#667eea] to-[#00d4ff] text-white px-8 md:px-12 py-5 md:py-7 text-lg md:text-xl font-bold hover:shadow-2xl hover:shadow-[#9902f7]/40 transition-all duration-500 hover:scale-105"
+              className="group rounded-full bg-gradient-to-r from-[#9902f7] via-[#9902f7] to-[#9902f7] text-white px-8 md:px-12 py-5 md:py-7 text-lg md:text-xl font-bold hover:shadow-2xl hover:shadow-[#9902f7]/40 transition-all duration-500 hover:scale-105"
               onClick={() => (window.location.href = "/shop")}
             >
               <TrendingUp className="mr-2 md:mr-3 h-5 w-5 md:h-6 md:w-6 group-hover:rotate-12 transition-transform duration-300" />
